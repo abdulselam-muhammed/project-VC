@@ -1,0 +1,14 @@
+Options +MultiViews
+RewriteEngine On
+RewriteBase /todo/
+
+ErrorDocument 404 /todo/errors/404.html
+
+RewriteRule ^to/(.*)$ Settings/router/$1 [NC,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
+RewriteRule ^ /todo/%1 [R=301,NE,L]
